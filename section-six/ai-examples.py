@@ -35,3 +35,26 @@ class MathUtils:
 # Call the static method without creating an instance
 result = MathUtils.add(5, 3)
 print(result)  # Output: 8
+
+
+# Encapsulation in Action
+# Here’s how encapsulation works to control access:
+
+class BankAccount:
+    def __init__(self, owner, balance=0):
+        self.owner = owner
+        self.__balance = balance  # private attribute
+
+    def deposit(self, amount):
+        if amount > 0:
+            self.__balance += amount  # update balance securely
+            return f"Deposited ${amount}. New balance: ${self.__balance}"
+        return "Invalid deposit amount."
+
+    def get_balance(self):
+        return f"{self.owner}'s balance: ${self.__balance}"  # provide controlled access
+
+# Create account and make deposit
+account = BankAccount("Alice", 100)
+print(account.deposit(50))         # Deposited $50. New balance: $150
+print(account.get_balance())        # Alice's balance: $150
