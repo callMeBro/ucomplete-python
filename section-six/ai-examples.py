@@ -36,6 +36,7 @@ class MathUtils:
 result = MathUtils.add(5, 3)
 print(result)  # Output: 8
 
+# ____________________________________________________________________________________________________________________________________________________________________________
 
 # Encapsulation in Action
 # Here’s how encapsulation works to control access:
@@ -58,3 +59,40 @@ class BankAccount:
 account = BankAccount("Alice", 100)
 print(account.deposit(50))         # Deposited $50. New balance: $150
 print(account.get_balance())        # Alice's balance: $150
+
+
+########################################################################################################################################################################
+
+# class that uses some dunder methods
+
+class Vector:
+    def __init__(self, x, y):
+        self.x = x
+        self.y = y
+
+    def __str__(self):
+        return f"Vector({self.x}, {self.y})"
+
+    def __add__(self, other):
+        return Vector(self.x + other.x, self.y + other.y)
+
+    def __len__(self):
+        return int((self.x**2 + self.y**2) ** 0.5)
+
+# Create two vector instances
+v1 = Vector(2, 3)
+v2 = Vector(4, 5)
+
+# Print the vector
+print(v1)             # Output: Vector(2, 3)
+
+# Add two vectors
+v3 = v1 + v2
+print(v3)            # Output: Vector(6, 8)
+
+# Get the length of a vector
+print(len(v1))      # Output: 3
+
+# Dunder methods are an essential part of Python's object-oriented programming, 
+# enabling you to define how objects behave in different contexts. By implementing 
+# these methods, you can make your custom classes more powerful and user-friendly, taking advantage of Python's built-in functionality.
