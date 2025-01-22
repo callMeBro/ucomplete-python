@@ -1,5 +1,6 @@
 import requests
 import hashlib
+import sys
 
 
 def request_api_data(query_char):
@@ -31,11 +32,28 @@ def pwned_api_check(password):
     return get_password_leaks_count(response, tail)
 
 
-# Test the function with a password
-password = "Ohmynassau123"
-leaks_count = pwned_api_check(password)
+def main(args):
+    
+    password = 'password'
+    try:
+        count = pwned_api_check(password)
+    except Exception as e:
+        print(f"Error checking password {password}: {e}")
+        return
 
-if leaks_count:
-    print(f'The password "{password}" was found {leaks_count} times. You should change it!')
-else:
-    print(f'The password "{password}" was NOT found. Carry on!')
+
+    for password in args:
+        count = pwned_api_check(password)
+    if count:
+        print(f'{password} was found {count} times... you should probaaly change your password.')
+    else:
+        print(f'{password} was NOT found. Carry on!')                       
+       
+    return 'done!'
+                   
+
+
+if __name__ == '__main__':
+    sys.exit(main(sys.argv[1:]))
+
+
